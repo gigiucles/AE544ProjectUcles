@@ -39,7 +39,7 @@ The performance of these integrators is evaluated to assess their impact on capt
 
 ## Usage
 
-1. **Run the simulation**: In MATLAB, open and run the script attitude_simulation.m. This will generate the necessary simulations and outputs for Euler angles and quaternions.
+1. **Run the simulation**: In MATLAB 2024b, open and run the script dynamicsAmbiguitiesUcles.m. This will generate the necessary simulations and outputs for Euler angles and quaternions.
 2. **Analyze the results**: The results will be displayed as numerical outputs and 3D animations. You can compare the stability of the Euler angle and quaternion representations, as well as the effects of different numerical integrators on the singularity problem.
 3. **Adjust Parameters**: Modify the input angular motion trace or change the integrators to explore different scenarios or compare different conditions.
 
