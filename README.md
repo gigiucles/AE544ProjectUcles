@@ -21,10 +21,17 @@ This simulation explores these differences, especially near singularities, and c
 
 ## Usage
 
-1.  **Run the simulation:** In MATLAB 2024b, open and run the script `dynamicsAmbiguitiesUcles.m`. This will generate the necessary simulations and outputs for Euler angles, quaternions, and CRPs.
-2.  **Analyze the results:** The results will be displayed as numerical outputs and 3D animations. You can compare the stability of the Euler angle, quaternion, and CRP representations, as well as the effects of different numerical integrators and tolerance settings on the singularity problem.
-3.  **Adjust Parameters:** Modify the input angular motion trace, change the integrators, or adjust the tolerances to explore different scenarios or compare different conditions.
+1.  **Clone the Repository:** Download the repository as a ZIP file from the main branch or use `git clone` to clone it directly.
 
+2.  **Run the Simulation:** Open MATLAB 2024b (or any compatible version) and execute the script `dynamicsAmbiguitiesUcles.m`. This will generate the numerical simulations and 3D animations comparing Euler angles, quaternions, and Classical Rodrigues Parameters (CRPs). (While the script is designed to run in any MATLAB version, it has been primarily tested in MATLAB 2024b.)
+
+3.  **Analyze the Results:** Review the generated numerical outputs and 3D animations. Compare the stability of the Euler angle, quaternion, and CRP representations. Observe the impact of different numerical integrators and tolerance settings on singularity handling.
+
+4.  **Adjust Simulation Parameters (Optional):**
+    * Modify the input angular velocity function (`omegaFunc`) to explore different rotational scenarios.
+    * Change the numerical integrator (`ode45`, `ode4`, `ode15s`) to observe their effects.
+    * Adjust the tolerance settings (`odeOptions`) to control the accuracy of the numerical integration.
+    * Example: To make the `ode4` solution more closely resemble `ode15s` or `ode45`, increase the number of steps (`N`) in line 179 of the code. Conversely, decrease `N` to observe a larger deviation.
 ## Analysis
 
 This simulation investigates the behavior of Euler angles, quaternions, and Classical Rodrigues Parameters (CRPs) when subjected to an angular velocity profile designed to approach a singularity for Euler angles. The initial Euler angles are set close to the singularity ($\theta \approx \pi/2$) for the 3-2-1 sequence.
@@ -44,31 +51,22 @@ This simulation investigates the behavior of Euler angles, quaternions, and Clas
 
 **Classical Rodrigues Parameters (CRPs):**
 
-* CRPs also show consistent behavior across the ODE solvers, indicating their stability in this scenario.
-* The conversion of CRP solutions back to Euler angles again results in smooth rotations, highlighting that the underlying motion is well-behaved.
-* The plots of the crp components show the relative consistency of all three solvers.
-* The plot of euler angles that were converted from the crps shows how well the crps handle the singularity.
+* Classical Rodrigues Parameters also show consistent behavior across the ODE solvers, indicating their stability in this scenario.
+* The conversion of Classical Rodrigues Parameters solutions back to Euler angles again results in smooth rotations, highlighting that the underlying motion is well-behaved.
+* The plots of the Classical Rodrigues Parameters components show the relative consistency of all three solvers.
+* The plot of euler angles that were converted from the Classical Rodrigues Parameters shows how well the Classical Rodrigues Parameters handle the singularity.
+
 
 **ODE Solver Comparison:**
 
-* **`ode4`:** Fixed step size makes it sensitive to singularities. It's the least accurate in this scenario.
-* **`ode45`:** Variable step size provides better accuracy and handles singularities effectively.
-* **`ode15s`:** A stiff solver, also with variable step size, is robust and accurate, particularly for systems with rapid changes.
-* The tolerance of the ode solvers has a large effect on the accuracy of the results. By setting a very low tolerance, the results of ode45 and ode15s become very similar.
+* **`ode4`:** Fixed step size makes it sensitive to singularities. It's the least accurate in this scenario. **A fixed step size means the solver uses the same time interval for each calculation, regardless of the function's behavior. This can lead to significant errors when dealing with rapidly changing functions, such as those encountered near singularities, as the solver may miss critical details.**
+* **`ode45`:** Variable step size provides better accuracy and handles singularities effectively. **`ode45` employs a variable step size, dynamically adjusting the time interval based on the function's behavior. Near singularities, it reduces the step size to capture rapid changes accurately, and in smoother regions, it increases the step size for computational efficiency.**
+* **`ode15s`:** A stiff solver, also with variable step size, is robust and accurate, particularly for systems with rapid changes. **`ode15s` is designed for stiff systems, which are systems with widely varying time scales. Like `ode45`, it uses a variable step size, but it is optimized to handle systems where some components of the solution decay much faster than others. This makes it particularly effective for problems that involve both fast and slow dynamics.**
+* The tolerance of the ODE solvers has a large effect on the accuracy of the results. By setting a very low tolerance, the results of `ode45` and `ode15s` become very similar. **Tolerance determines the maximum allowable error in the numerical solution. A lower tolerance forces the solvers to take smaller steps and perform more calculations, resulting in higher accuracy but also increased computational cost. Conversely, a higher tolerance allows for larger steps and faster computation, but at the expense of accuracy.**
 
 **3D Animation:**
 
 * The 3D animation using quaternions visually confirms the smoothness of the rotation, even when the Euler angles are near a singularity. This reinforces that the singularity is a representational issue, not a physical discontinuity.
-
-**Conclusion:**
-
-This simulation effectively demonstrates the advantages of using quaternions and CRPs over Euler angles in scenarios involving or approaching singularities. The choice of ODE solver is crucial, with variable step-size methods (`ode45`, `ode15s`) providing superior accuracy and stability compared to fixed step-size methods (`ode4`) when dealing with singularities.
-
-## Tools and Assistance
-
-This project utilized several tools to enhance its quality and clarity. Specifically:
-
-* **ChatGPT and Gemini AI:** These AI language models were employed for grammar checking, improving code clarity, and ensuring conciseness by removing redundancies.
 
 ## Results
 
@@ -115,8 +113,24 @@ Here are the images produced by the simulation:
     * This further confirms that CRPs can be used to avoid singularities.
     ![euler_from_crp.png](results/euler_from_crp.png)
 
-8.  **`attitude_animation_export_fast.gif`:**
+8.  **`attitude_animation_fast.gif`:**
     * This animated GIF visually demonstrates the 3D rotation of a frame using quaternions.
     * It shows a smooth, continuous rotation, effectively illustrating the absence of gimbal lock and the stability of quaternion representation.
     * This animation provides a clear visual confirmation of the theoretical advantages of using quaternions for attitude kinematics.
-    ![attitude_animation_export_fast.gif](attitude_animation_export_fast.gif)
+    * Due to compression, the animation may appear slightly jumpy. For the smoothest visual representation, please run the MATLAB code directly.
+    ![attitude_animation_fast.gif](results/attitude_animation_fast.GIF)
+
+## Conclusion
+
+This simulation effectively demonstrates the advantages of using quaternions and CRPs over Euler angles in scenarios involving or approaching singularities. The choice of ODE solver is crucial, with variable step-size methods (`ode45`, `ode15s`) providing superior accuracy and stability compared to fixed step-size methods (`ode4`) when dealing with singularities.
+
+## Tools and Assistance
+
+This project utilized several tools to enhance its quality and clarity. Specifically:
+
+* **ChatGPT and Gemini AI:** These AI language models were employed for grammar checking, improving code clarity, and ensuring conciseness by removing redundancies.
+* **EZGIF.com:** This online tool was used for compressing the animated GIF, `attitude_animation_export_fast.gif`, to reduce its file size while maintaining acceptable visual quality.
+
+## Disclaimer
+
+Please note that the code used to generate the animated GIF (`attitude_animation_fast.gif`) from the 3D animation is a separate script. Due to its longer execution time and the fact that it only needed to be run once to produce the GIF, it has not been included in this repository. The primary focus of this repository is to demonstrate the numerical simulation and comparison of attitude kinematics representations.
