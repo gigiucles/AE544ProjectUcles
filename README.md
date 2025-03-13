@@ -105,11 +105,11 @@ Here are the images produced by the simulation:
     * This further confirms that CRPs can be used to avoid singularities.
     ![euler_from_crp.png](results/euler_from_crp.png)
 
-8.  **`attitude_animation_export_fast.gif`:**
+8.  **`attitude_animation_fast.gif`:**
     * This animated GIF visually demonstrates the 3D rotation of a frame using quaternions.
     * It shows a smooth, continuous rotation, effectively illustrating the absence of gimbal lock and the stability of quaternion representation.
     * This animation provides a clear visual confirmation of the theoretical advantages of using quaternions for attitude kinematics.
-    ![attitude_animation_export_fast.gif](attitude_animation_export_fast.gif)
+    ![attitude_animation_fast.gif](results/attitude_animation_fast.gif)
 
 ## Conclusion
 
