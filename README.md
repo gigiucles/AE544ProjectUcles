@@ -60,16 +60,6 @@ This simulation investigates the behavior of Euler angles, quaternions, and Clas
 
 * The 3D animation using quaternions visually confirms the smoothness of the rotation, even when the Euler angles are near a singularity. This reinforces that the singularity is a representational issue, not a physical discontinuity.
 
-**Conclusion:**
-
-This simulation effectively demonstrates the advantages of using quaternions and CRPs over Euler angles in scenarios involving or approaching singularities. The choice of ODE solver is crucial, with variable step-size methods (`ode45`, `ode15s`) providing superior accuracy and stability compared to fixed step-size methods (`ode4`) when dealing with singularities.
-
-## Tools and Assistance
-
-This project utilized several tools to enhance its quality and clarity. Specifically:
-
-* **ChatGPT and Gemini AI:** These AI language models were employed for grammar checking, improving code clarity, and ensuring conciseness by removing redundancies.
-
 ## Results
 
 Here are the images produced by the simulation:
@@ -120,6 +110,16 @@ Here are the images produced by the simulation:
     * It shows a smooth, continuous rotation, effectively illustrating the absence of gimbal lock and the stability of quaternion representation.
     * This animation provides a clear visual confirmation of the theoretical advantages of using quaternions for attitude kinematics.
     ![attitude_animation_export_fast.gif](attitude_animation_export_fast.gif)
+
+## Conclusion
+
+This simulation effectively demonstrates the advantages of using quaternions and CRPs over Euler angles in scenarios involving or approaching singularities. The choice of ODE solver is crucial, with variable step-size methods (`ode45`, `ode15s`) providing superior accuracy and stability compared to fixed step-size methods (`ode4`) when dealing with singularities.
+
+## Tools and Assistance
+
+This project utilized several tools to enhance its quality and clarity. Specifically:
+
+* **ChatGPT and Gemini AI:** These AI language models were employed for grammar checking, improving code clarity, and ensuring conciseness by removing redundancies.
 
 
 ## Disclaimer
