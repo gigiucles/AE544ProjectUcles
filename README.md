@@ -68,4 +68,55 @@ This simulation effectively demonstrates the advantages of using quaternions and
 
 This project utilized several tools to enhance its quality and clarity. Specifically:
 
-* **ChatGPT and Gemini AI:** These AI language models were employed for grammar checking, improving code clarity, and ensuring conciseness by removing redundancies. 
+* **ChatGPT and Gemini AI:** These AI language models were employed for grammar checking, improving code clarity, and ensuring conciseness by removing redundancies.
+
+## Results
+
+Here are the images produced by the simulation:
+
+1.  **`euler_angles_by_ode.png`:**
+    * This image displays the Euler angles ($\psi$, $\theta$, $\phi$) over time, as computed by the three different ODE solvers (`ode45`, `ode4`, `ode15s`).
+    * It visually demonstrates how `ode4` deviates significantly from the other two solvers, especially in the $\theta$ (theta) angle, near the singularity point.
+    * This shows the difference in accuracy that is caused by fixed step solvers versus variable step solvers.
+    ![euler_angles_by_ode.png](results/euler_angles_by_ode.png)
+
+2.  **`euler_angles_by_angle.png`:**
+    * This image compares the Euler angle values from the three solvers for each angle separately.
+    * It clearly shows the divergence of `ode4`'s solution, particularly in the $\theta$ component, while `ode45` and `ode15s` remain closely aligned.
+    * This further shows the difference in accuracy that is caused by fixed step solvers versus variable step solvers.
+    ![euler_angles_by_angle.png](results/euler_angles_by_angle.png)
+
+3.  **`quaternion_components.png`:**
+    * This image plots the four components of the quaternion ($q_1$, $q_2$, $q_3$, $q_4$) over time for each ODE solver.
+    * All three solvers produce very similar results, indicating that quaternions are not affected by the singularity in the same way as Euler angles.
+    * This shows the numerical stability of quaternions.
+    ![quaternion_components.png](results/quaternion_components.png)
+
+4.  **`quaternion_components_comparison.png`:**
+    * This image shows each of the 4 quaternion components, and overlays the results of each of the three ode solvers.
+    * This further shows the numerical stability of quaternions.
+    ![quaternion_components_comparison.png](results/quaternion_components_comparison.png)
+
+5.  **`euler_from_quaternion.png`:**
+    * This image displays the Euler angles obtained by converting the quaternion solutions from `ode45` back to Euler angles.
+    * The plot shows smooth, continuous behavior, confirming that the underlying rotation is well-behaved, even when the initial Euler angles were close to a singularity.
+    * This shows how quaternions can be used to avoid singularities.
+    ![euler_from_quaternion.png](results/euler_from_quaternion.png)
+
+6.  **`crp_components.png`:**
+    * This image shows the 3 components of the Classical Rodrigues Parameters over time for each ODE solver.
+    * It demonstrates that CRPs, like quaternions, maintain stability and consistency across the different integration methods.
+    * This highlights the robustness of CRPs in handling attitude kinematics, even when approaching singularities in other representations.
+    ![crp_components.png](results/crp_components.png)
+
+7.  **`euler_from_crp.png`:**
+    * This image shows the Euler angles obtained by converting the CRP solutions from `ode45` back to Euler angles.
+    * The plot shows smooth, continuous behavior, proving that CRPs also maintain a well-behaved rotation even when the initial Euler angles were close to a singularity.
+    * This further confirms that CRPs can be used to avoid singularities.
+    ![euler_from_crp.png](results/euler_from_crp.png)
+
+8.  **`attitude_animation_export_fast.gif`:**
+    * This animated GIF visually demonstrates the 3D rotation of a frame using quaternions.
+    * It shows a smooth, continuous rotation, effectively illustrating the absence of gimbal lock and the stability of quaternion representation.
+    * This animation provides a clear visual confirmation of the theoretical advantages of using quaternions for attitude kinematics.
+    ![attitude_animation_export_fast.gif](attitude_animation_export_fast.gif)
