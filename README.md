@@ -120,3 +120,8 @@ Here are the images produced by the simulation:
     * It shows a smooth, continuous rotation, effectively illustrating the absence of gimbal lock and the stability of quaternion representation.
     * This animation provides a clear visual confirmation of the theoretical advantages of using quaternions for attitude kinematics.
     ![attitude_animation_export_fast.gif](attitude_animation_export_fast.gif)
+
+
+## Disclaimer
+
+Please note that the code used to generate the animated GIF (`attitude_animation_export_fast.gif`) from the 3D animation is a separate script. Due to its longer execution time and the fact that it only needed to be run once to produce the GIF, it has not been included in this repository. The primary focus of this repository is to demonstrate the numerical simulation and comparison of attitude kinematics representations.
